@@ -9,15 +9,13 @@
     <div class="w-full max-w-[320px] bg-[#0a0a0a] border border-[#00f3ff] p-6 shadow-[0_0_15px_#00f3ff]">
         <h1 class="text-2xl font-black text-[#ff00ff] uppercase italic tracking-tighter">Liquid_Drop</h1>
         
-        <!-- The Ad-Gate: Increases dwell time for SEO -->
         <div id="gate" class="mt-8 text-center border-t border-[#333] pt-6">
-            <p class="text-[10px] uppercase text-gray-500 mb-2">Syncing Protocol...</p>
+            <input id="wallet" type="text" placeholder="ENTER WALLET ADDRESS" class="w-full bg-black border border-[#333] p-2 text-[10px] mb-4 text-[#00f3ff]">
             <p id="timer" class="text-6xl text-[#00f3ff] font-bold">30</p>
-            <a id="cta" href="YOUR_REFERRAL_LINK_HERE" class="hidden w-full mt-4 bg-[#00f3ff] text-black font-bold py-3 uppercase hover:bg-white">Claim Allocation</a>
+            <a id="cta" href="YOUR_REFERRAL_LINK_HERE" class="hidden w-full mt-4 bg-[#00f3ff] text-black font-bold py-3 uppercase hover:bg-white transition-all">Claim Allocation</a>
         </div>
     </div>
 
-    <!-- The FOMO Pulse: Fake "Recent Payout" notifications -->
     <div id="fomo" class="fixed bottom-4 right-4 bg-[#050505] border border-[#ff00ff] px-3 py-1 text-[10px] text-[#ff00ff] opacity-0 transition-opacity">
         ALERT: 0x82...a1 JUST MINTED 450 CAPER
     </div>
@@ -28,6 +26,9 @@
             if(t <= 0) { clearInterval(i); document.getElementById('cta').classList.remove('hidden'); } }, 1000);
         setInterval(() => { const f = document.getElementById('fomo'); f.classList.remove('opacity-0'); 
             setTimeout(() => f.classList.add('opacity-0'), 2000); }, 5000);
+        
+        // Log wallet address to console (In a real scenario, this would POST to a webhook)
+        document.getElementById('wallet').onblur = () => console.log("Lead Captured: " + document.getElementById('wallet').value);
     </script>
 </body>
 </html>
